@@ -42,7 +42,7 @@ export const trendData = (trend1, trend2, trend3) => async (dispatch) => {
         });
     }
 };
-
+//----------------------------------------------------
 export const sendData = (spreadSheet) => async (dispatch) => {
     try {
         dispatch({
@@ -50,14 +50,16 @@ export const sendData = (spreadSheet) => async (dispatch) => {
         })
         console.log('dispatched')
         //const country = RNLocalize.getCountry();
-
-        const result = await axios.post(`${domain}/${trend1}/${trend2}/${trend3}`)
-        // const result2 = await axios.get(`${domain}/${trend2}`)
+        console.log("spreadSheet => ",spreadSheet);
+       
+        const result = await axios.post(`${domain}/`, spreadSheet)
         // console.log(result.data)
+        /*
         dispatch({
             type: 'TREND_RECEIVED',
             payload: result.data
         });
+       */
     } catch (error) {
 
         if (error.response) {
@@ -83,7 +85,7 @@ export const sendData = (spreadSheet) => async (dispatch) => {
         });
     }
 };
-
+//----------------------------------------------------
 export const getTrending = (Countrytrend1, Countrytrend2, Countrytrend3) => async (dispatch) => {
     try {
         dispatch({
@@ -130,3 +132,5 @@ export const getTrending = (Countrytrend1, Countrytrend2, Countrytrend3) => asyn
         });
     }
 };
+//----------------------------------------------------
+//----------------------------------------------------

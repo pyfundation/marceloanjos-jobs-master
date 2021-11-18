@@ -17,7 +17,6 @@ app.get("/", (req, res) => {
   });
 //-------------------------------------------
 app.get("/:keyword/:keyword2/:keyword3", async (req, res) => {
-
     try {
 
         //console.log('reached')
@@ -113,7 +112,7 @@ app.get("/:keyword/:keyword2/:keyword3", async (req, res) => {
     } catch (err) {
         console.log(err)
     }
-})
+});
 //-------------------------------------------
 app.get('/:country', async (req, res) => {
     try {
@@ -131,11 +130,13 @@ app.get('/:country', async (req, res) => {
     } catch (err) {
         console.log(err)
     }
-})
+});
 //-------------------------------------------
 app.post("/", async (req, res) => {
-    const { country_name, trend_title, trend_url, formatted_traffic,request, name } = req.body;
-  
+    try {
+    const { country_name, trend_title, trend_url, formatted_traffic} = req.body;
+    console.log("spreadSheet Body ", req.body);
+
     const auth = new google.auth.GoogleAuth({
       keyFile: "credentials.json",
       scopes: "https://www.googleapis.com/auth/spreadsheets",
@@ -169,14 +170,17 @@ app.post("/", async (req, res) => {
       range: "Página1!A:F",
       valueInputOption: "USER_ENTERED",
       resource: {
-        values: [[country_name, trend_title, trend_url, formatted_traffic, request, name]],
+        values: [[country_name, trend_title, trend_url, formatted_traffic]],
       },
     });
   
     res.send("Successfully submitted! Thank you!");
     // res.send(metadata.data);
+} catch (err) {
+    console.log(err)
+}
   });
 //-------------------------------------------
 app.listen(process.env.PORT || '3001', function() {
     console.log("Server started!!")
-})
+});

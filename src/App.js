@@ -1,14 +1,14 @@
 import React, { useEffect, useState, Fragment } from "react";
 import Chart from 'react-google-charts'
 import { connect} from "react-redux";
-import {trendData, getTrending} from './actions/data' 
+import {trendData, getTrending, sendData} from './actions/data' 
 import {PropTypes} from 'prop-types'
 import loading from './loading.gif'
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 
 
-const App = ({trendData,sending,dailyTrending, result, getTrending,keyArr}) => {
+const App = ({trendData, sendData, sending,dailyTrending, result, getTrending,keyArr}) => {
   
   useEffect(()=>{
    // console.log('Hello');
@@ -95,18 +95,26 @@ const App = ({trendData,sending,dailyTrending, result, getTrending,keyArr}) => {
   const handleClickSend = async(e) =>{
     if(Usering.length !== 0 && Tokening.length !== 0 ){
     console.log('clicked Send', data);
+    const spreadSheet = {
+      country_name: Countrytrending1 + '-' + Countrytrending2 + '-' + Countrytrending3, 
+      trend_title:  trending1 + '-' + trending2 + '-' + trending3, 
+      trend_url: "http://localhost:3001/", 
+      formatted_traffic: keyArr.toString(),
+    };
+    //console.log("spreadSheet ",spreadSheet);
+    sendData(spreadSheet);
     }
   }
   // ------------------------------------------
   // ------------------------------------------
 
   const [User,setUser] = useState({
-    Usering:'User'
+    Usering:'116243419520959107990'
    })
    const {Usering} = User;
  
    const [Token,setToken] = useState({
-     Tokening:'Token'
+     Tokening:'MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDGTAxN+ZTYib3J\ndrfXVPB3Bvn94znDjD+x+tCG0+0DbY1rcRqln1ljLWFDNgtig5NMWyLMNONv62QT\nyyrMA7JXmSYyhN5vu4dNsoIoMf6ExLlzSafHRiejc8tqL+g/i2vxlI/ExGJJpoHY\n7skjNCQKhLrp9cGAeNJhPOYaNRBczlhUZwiT645pbN524ptIc7BcoofgYirwGtwW\nn7EG+Og8zR9NKWrKI93q6qGAdlyK1fUJAiRAOloNurRNUYbWVNsvOQZ1XFHr0ih2\nNha172/EptrdRsHN5BfkcTS6y8t5VOXTJMqbAVppOfgmRUPAW4FzErSy44HiVIk/\nR24ew711AgMBAAECggEAMsqW2kAj3oUFfj1w4HBquWopjVzu1kYtqHZghDBzRI4C\ni7MoSqTyveMJRzBoIR8nkwbC9oBTgz7NXv6Ko0ANJb/eF1GOMhtcEEw5Z3dKxJIp\nGD0VAwdWrtjBkRzdRa1+BB5z5sgQjuHd34VmMqSv2Jvfzn56xl/sLyjsnWjbHJHw\nTm9BqjnmdLRLueSZ9dfYIuvFv0nDC3e72hynYEX5Lp3xS/LHtICB7rWNBID3HlnV\nLFE+XKLFSjh9JeR/TvcMDmYaqmpEMEr7A+lMQDuAJ4MCGLFIaiFxynLR94dNIres\n4J85lOWIzaQsasOsYmATxglP9RAeoqcXeEJ+lkFl/wKBgQDvbVjl3yK/BpAOqa9S\nTRIvo5pZTP0hqLtc720w8HZ368fl7OiAe1eyoodScmbdAhRiIx+ZCFYstLe/Y6Gy\nqY/476Cn+Ape6nPWASAcYu3XTFQNp98jXAO+BlVbjdlqvBvRWPYEB06xqJU6hkTa\nmEX2ZFBnhZYdz4AkWSCn7QGt5wKBgQDUBeAOHGEJTDwcuqSuabJ/bCYR70cj9qIo\nofJ+q7av5sTx+btfjFZK4NC/3lme4lRvL9+PROXZIqmlH/P23MSX/NeK7cMRL1SW\ncfCDS3f+T8kYzyU3nuPSWslMqzU9lEVitQBzHCQYiuLqXtfVvvbNyKjRd9B45sCw\nVk+KbKe2QwKBgQCiZpQnD8w8sFHkcDpoY7iTMbCPJAaK3y1/YzO4P1LMEtT7Y09t\nXrxkgZOyW8Dj5fY3fsV/AsWY+1erbQQP8K2kV72sUTWPng3GOesy9fOH1tEolhZn\noJE1QoyBVl0D5eYkgOgWYXKCVOwrz0lC0IicEPzsyxLA06+CeCYLYVqDPwKBgDja\n0ng2N/csUDpL+nkistDkiVjp1yPXsShANSyukzCcK1fP5eT7VvCBVLj+wP2QJ6Ah\nMEvU5+XQG7nB1cPu83DmRk5k75geHwqwxxQOGsFBV+WlNo+xtdnkqnI6vu4iYnDT\npKk5dJx4Md0zTaFtsfUAx/RTsr2Y8zbWDkJKXLbNAoGBAKYDvx8/5AAzbi6UkykS\nUOhAmjLNyXTXazHBDDL4dsEwRSOVbZ3pCoivrVtPXI5brz6O3BX3kUqTnzjBnQ0V\not3hpseDUHh1GyjqcssBan2/KQRzLGK25qpOFUSsyP4DUgmn01PyvAlNvl6btoGN\ntcIfeVCfe+jtzzJjrjVsKDrj'
     })
     const {Tokening} = Token;
 
@@ -140,7 +148,7 @@ const App = ({trendData,sending,dailyTrending, result, getTrending,keyArr}) => {
     })
     const {Countrytrending3} = Countrytrend3;
  
-  const data = result.length === 0 || result.length === 1 ? [[1,1,1,1]]: result;
+  const data = result.length === 0 || result.length === 1 ? [[1,1,1,1,1]]: result;
   const options = {
     title: "Trend Comparison",
     curveType: "function",
@@ -180,9 +188,9 @@ const App = ({trendData,sending,dailyTrending, result, getTrending,keyArr}) => {
 
     <div className="col-md-10 col-sm-12">
     <div  style={{"textAlign":"center"}}>
-        <h3 className="display-4" style={{"textAlign":"center"}}>USER</h3>
+        <h5 className="display-4" style={{"textAlign":"center"}}>USER_ID</h5>
         <textarea style={{"margin":"10px","width":"30%"}} placeholder = {String(User.Usering)} onChange={handleUser}></textarea>
-        <h3 className="display-4" style={{"textAlign":"center"}}>TOKEN</h3>
+        <h5 className="display-4" style={{"textAlign":"center"}}>TOKEN</h5>
         <textarea style={{"margin":"10px","width":"30%"}} placeholder = {String(Token.Tokening)} onChange={handleToken}></textarea>
       </div>
     <div  style={{"textAlign":"center"}}>
@@ -250,6 +258,7 @@ const App = ({trendData,sending,dailyTrending, result, getTrending,keyArr}) => {
 
 App.propTypes = {
 trendData:PropTypes.func.isRequired,
+sendData:PropTypes.func.isRequired,
 sending:PropTypes.bool.isRequired,
 dailyTrending:PropTypes.bool.isRequired,
 result:PropTypes.array.isRequired,
@@ -261,9 +270,9 @@ const mapStateToProps = (state) => ({
  sending:state.trend.sending,
  dailyTrending:state.trend.dailyTrending,
  result:state.trend.result,
-keyArr:state.trend.keyArr
+ keyArr:state.trend.keyArr
  });
 
 export default connect(mapStateToProps, {
- trendData, getTrending
+ trendData, getTrending, sendData,
 })(App);

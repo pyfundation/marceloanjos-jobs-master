@@ -1,12 +1,3 @@
-#place your token and id
-
-#init trend search
-yarn start:server
-
-#init front search and insert spreadsheet
-yarn dev
-
-#button search to search 
 
 ##### SHOW RESULTS AND GRAPHICS #####
 
@@ -36,3 +27,22 @@ Google API Console: https://console.cloud.google.com
 
 #NAME
 marceloanjos-jobs
+
+http://localhost:3001/   # EJS FORMS
+http://localhost:3000/   # REACT FRONTEND
+
+
+yarn
+#init trend search
+yarn start:server
+
+#init front search and insert spreadsheet
+yarn dev
+
+#place your token and id
+#Tap to change words
+
+#button Country Set to change Country 
+#button Country Trends to Generate Trends Graphics 
+#button Send Sheets to store 
+#button Line Charts Change Graphics Mode 
