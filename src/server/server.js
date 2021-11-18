@@ -132,10 +132,10 @@ app.get('/:country', async (req, res) => {
     }
 });
 //-------------------------------------------
-app.post("/", async (req, res) => {
+app.post("/:spreadsheet", async (req, res) => {
     try {
-    const { country_name, trend_title, trend_url, formatted_traffic} = req.body;
-    console.log("spreadSheet Body ", req.body);
+    const { country_name, trend_title, trend_url, formatted_traffic} = req.params;
+    console.log("spreadSheet Body ", country_name);
 
     const auth = new google.auth.GoogleAuth({
       keyFile: "credentials.json",

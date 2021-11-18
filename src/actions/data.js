@@ -52,7 +52,7 @@ export const sendData = (spreadSheet) => async (dispatch) => {
         //const country = RNLocalize.getCountry();
         console.log("spreadSheet => ",spreadSheet);
        
-        const result = await axios.post(`${domain}/`, spreadSheet)
+        const result = await axios.post(`${domain}/${spreadSheet}`)
         // console.log(result.data)
         /*
         dispatch({
