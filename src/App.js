@@ -95,14 +95,14 @@ const App = ({trendData, sendData, sending,dailyTrending, result, getTrending,ke
   const handleClickSend = async(e) =>{
     if(Usering.length !== 0 && Tokening.length !== 0 ){
     console.log('clicked Send', data);
-    const spreadSheet = {
-      country_name: Countrytrending1 + '-' + Countrytrending2 + '-' + Countrytrending3, 
-      trend_title:  trending1 + '-' + trending2 + '-' + trending3, 
+    const spread = {
+      country_name: String(Countrytrending1 + '-' + Countrytrending2 + '-' + Countrytrending3), 
+      trend_title:  String(trending1 + '-' + trending2 + '-' + trending3), 
       trend_url: "http://localhost:3001/", 
-      formatted_traffic: keyArr.toString(),
+      formatted_traffic: String(keyArr.toString()),
     };
-    //console.log("spreadSheet ",spreadSheet);
-    sendData(spreadSheet);
+    //console.log("spread ",spread);
+    sendData(spread);
     }
   }
   // ------------------------------------------

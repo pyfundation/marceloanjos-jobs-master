@@ -132,11 +132,32 @@ app.get('/:country', async (req, res) => {
     }
 });
 //-------------------------------------------
-app.post("/:spreadsheet", async (req, res) => {
+app.post("/", async (req, res) => {
     try {
-    const { country_name, trend_title, trend_url, formatted_traffic} = req.params;
-    console.log("spreadSheet Body ", country_name);
 
+   var values = req.body; 
+   // DEMO OF CONSTRUCT AND DEESTRUCTURE OBJ
+   const valores = JSON.stringify(values);
+   const trends = valores.replace(/[^a-zA-Z ]/g, "");
+   let country_nameS = trends.indexOf('countryname');
+   let trend_titleS = trends.indexOf('trendtitle');
+   let trend_urlS = trends.indexOf('trendurl');
+   let formatted_trafficS = trends.indexOf('formattedtraffic');
+   let lengthS = trends.length;
+   const country_name = trends.slice(country_nameS+11,trend_titleS);
+   const trend_title = trends.slice(trend_titleS+10,trend_urlS);
+   const trend_url = trends.slice(trend_urlS+8,formatted_trafficS);
+   const formatted_traffic = trends.slice(formatted_trafficS+16,lengthS);
+   /*
+   console.log(country_name);
+   console.log(trend_title);
+   console.log(trend_url);
+   console.log(formatted_traffic);
+   */
+   //const country_name = JSON.parse(country_name);
+   //const { country_name, trend_title, trend_url, formatted_traffic} = values;
+
+   console.log("SPREAD ",trends);
     const auth = new google.auth.GoogleAuth({
       keyFile: "credentials.json",
       scopes: "https://www.googleapis.com/auth/spreadsheets",

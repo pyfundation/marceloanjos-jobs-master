@@ -43,27 +43,18 @@ export const trendData = (trend1, trend2, trend3) => async (dispatch) => {
     }
 };
 //----------------------------------------------------
-export const sendData = (spreadSheet) => async (dispatch) => {
+export const sendData = (spread) => async (dispatch) => {
     try {
-        dispatch({
-            type: 'SENDING'
-        })
+       
         console.log('dispatched')
         //const country = RNLocalize.getCountry();
-        console.log("spreadSheet => ",spreadSheet);
-       
-        const result = await axios.post(`${domain}/${spreadSheet}`)
-        // console.log(result.data)
-        /*
-        dispatch({
-            type: 'TREND_RECEIVED',
-            payload: result.data
-        });
-       */
+        //console.log("spreadSheet => ",{spread});
+        const spreads = JSON.stringify(spread);
+        const result = await axios.post(`${domain}/`,spreads)
+      
     } catch (error) {
 
         if (error.response) {
-
             console.log(error.response.data.errors);
             console.log(error.response.status);
             console.log(error.response.headers);
@@ -80,9 +71,6 @@ export const sendData = (spreadSheet) => async (dispatch) => {
         }
         console.log(error);
 
-        dispatch({
-            type: 'TREND_ERROR',
-        });
     }
 };
 //----------------------------------------------------
