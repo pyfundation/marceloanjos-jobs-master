@@ -159,14 +159,14 @@ app.post("/", async (req, res) => {
     const getRows = await googleSheets.spreadsheets.values.get({
       auth,
       spreadsheetId,
-      range: "Sheet1!A:F",
+      range: "Página1!A:F",
     });
   
     // Write row(s) to spreadsheet
     await googleSheets.spreadsheets.values.append({
       auth,
       spreadsheetId,
-      range: "Sheet1!A:F",
+      range: "Página1!A:F",
       valueInputOption: "USER_ENTERED",
       resource: {
         values: [[country_name, trend_title, trend_url, formatted_traffic, request, name]],
